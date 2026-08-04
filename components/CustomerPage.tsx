@@ -246,7 +246,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
               </p>
             </div>
 
-            {/* === HIER DIE EINZIGE ÄNDERUNG === */}
+            {/* Abstand Öffnungszeiten → Bewertung verkleinert (nur Mobile) */}
             {customer.rating && (
               <div className="inline-flex items-center gap-1.5 mt-1 md:mt-4 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
                 <span className="text-yellow-400 text-[12px] md:text-base">★★★★★</span>
@@ -257,8 +257,8 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
             )}
           </div>
 
-          {/* BUTTONS */}
-          <div className="mt-3.5 md:mt-8 space-y-2.5 md:space-y-3.5">
+          {/* Abstand Bewertung → Google-Button verkleinert (nur Mobile) */}
+          <div className="mt-2.5 md:mt-8 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
                 key={btn.label}
