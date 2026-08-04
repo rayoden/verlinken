@@ -246,8 +246,9 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
               </p>
             </div>
 
+            {/* === HIER DIE EINZIGE ÄNDERUNG === */}
             {customer.rating && (
-              <div className="inline-flex items-center gap-1.5 mt-2 md:mt-4 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-1.5 mt-1 md:mt-4 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
                 <span className="text-yellow-400 text-[12px] md:text-base">★★★★★</span>
                 <span className="text-[12px] md:text-sm font-semibold">
                   {customer.rating} · {customer.reviews} Bewertungen
