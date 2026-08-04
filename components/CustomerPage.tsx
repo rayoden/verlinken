@@ -138,6 +138,14 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
   return (
     <>
       <style jsx global>{`
+        /* Force dark theme everywhere – egal ob System Dark/Light oder Browser */
+        :root {
+          color-scheme: dark;
+        }
+        html, body {
+          background-color: #020617 !important; /* slate-950 */
+          color-scheme: dark;
+        }
         @keyframes gold-shimmer {
           0% { box-shadow: 0 0 6px rgba(251, 191, 36, 0.4), 0 0 12px rgba(245, 158, 11, 0.3), 0 0 18px rgba(217, 119, 6, 0.2); }
           50% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.65), 0 0 22px rgba(245, 158, 11, 0.45), 0 0 32px rgba(217, 119, 6, 0.3); }
@@ -148,46 +156,43 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
         }
       `}</style>
 
-      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden">
+      <main className="min-h-dvh bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden">
+        {/* Glows – genau wie im ersten Bild */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <div className={`absolute -top-32 -right-32 w-96 h-96 ${theme.glow} rounded-full blur-3xl`} />
           <div className="absolute bottom-0 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         </div>
 
-        {/* Desktop = original, Mobile = kompakt */}
-        <div className="relative z-10 max-w-md mx-auto px-5 pt-5 pb-6 md:pt-10 md:pb-8">
+        {/* Desktop = original | Mobile = exakt wie erstes Bild */}
+        <div className="relative z-10 max-w-md mx-auto px-5 pt-4 pb-5 md:pt-10 md:pb-8">
           
-          {/* ===== HEADER ===== */}
+          {/* HEADER – Mobile kompakt wie erstes Bild */}
           <div className={`text-center transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             
-            {/* Logo: Mobile kleiner, Desktop original */}
-            <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-3 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
+            {/* Logo */}
+            <div className="w-[72px] h-[72px] md:w-24 md:h-24 mx-auto mb-3 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2.5 md:p-3">
               <img src="/logo.webp" alt={customer.name} className="w-full h-full object-contain" />
             </div>
 
-            {/* Name: Mobile kleiner, Desktop original */}
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+            <h1 className="text-[26px] md:text-3xl font-extrabold tracking-tight leading-tight">
               {customer.name}
             </h1>
             
-            {/* Tagline */}
-            <p className={`mt-0.5 md:mt-1.5 text-sm font-medium ${theme.badge}`}>
+            <p className={`mt-1 md:mt-1.5 text-sm font-medium ${theme.badge}`}>
               {customer.tagline}
             </p>
 
-            {/* Bewertung: Mobile kompakter, Desktop original */}
             {customer.rating && (
-              <div className="inline-flex items-center gap-1.5 md:gap-2 mt-2.5 md:mt-4 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
-                <span className="text-yellow-400 text-sm md:text-base">★★★★★</span>
-                <span className="text-xs md:text-sm font-semibold">
+              <div className="inline-flex items-center gap-1.5 md:gap-2 mt-2.5 md:mt-4 px-3.5 md:px-4 py-1 md:py-1.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
+                <span className="text-yellow-400 text-[13px] md:text-base">★★★★★</span>
+                <span className="text-[13px] md:text-sm font-semibold">
                   {customer.rating} · {customer.reviews}+ Bewertungen
                 </span>
               </div>
             )}
           </div>
 
-          {/* ===== BUTTONS ===== */}
-          {/* Mobile: etwas enger, Desktop: original */}
+          {/* BUTTONS – Mobile wie erstes Bild (fast original Größe) */}
           <div className="mt-5 md:mt-8 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
@@ -197,17 +202,15 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
                 rel="noopener noreferrer"
                 onClick={btn.onClick}
                 className={`group block transition-all duration-500 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${150 + i * 70}ms` }}
+                style={{ transitionDelay: `${120 + i * 60}ms` }}
               >
                 <div className={`rounded-2xl border backdrop-blur-md px-4 py-3.5 md:px-5 md:py-4 flex items-center gap-3.5 md:gap-4 ${btn.bg} hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg ${btn.label === "Auf Google bewerten" ? "gold-glow" : ""}`}>
-                  
-                  {/* Icon-Box: Mobile etwas kleiner, Desktop original */}
-                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center shrink-0 ${btn.iconBg}`}>
+                  <div className={`w-[48px] h-[48px] md:w-14 md:h-14 rounded-xl flex items-center justify-center shrink-0 ${btn.iconBg}`}>
                     {btn.icon}
                   </div>
 
                   <div className="flex-1 min-w-0 text-left">
-                    <p className="font-bold text-[17px] md:text-lg leading-tight">{btn.label}</p>
+                    <p className="font-bold text-[16.5px] md:text-lg leading-tight">{btn.label}</p>
                     <p className="text-[13px] md:text-sm text-white/70 truncate">{btn.sub}</p>
                   </div>
 
@@ -217,8 +220,8 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
             ))}
           </div>
 
-          {/* Footer: Mobile kompakter, Desktop original */}
-          <div className={`mt-6 md:mt-10 flex items-center justify-center gap-2.5 md:gap-3 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
+          {/* FOOTER – immer sichtbar auf Mobile */}
+          <div className={`mt-5 md:mt-10 flex items-center justify-center gap-2.5 md:gap-3 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
             <span>
               © {new Date().getFullYear()}{" "}
               <a href="https://verlinken.ch" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-slate-300 transition">
@@ -230,7 +233,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           </div>
         </div>
 
-        {/* Modal bleibt unverändert */}
+        {/* Modal bleibt gleich */}
         {showCard && (
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowCard(false)} />
