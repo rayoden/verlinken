@@ -154,32 +154,41 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           <div className="absolute bottom-0 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-md mx-auto px-5 pt-10 pb-8">
-          {/* Header - wie im ersten Screenshot */}
+        {/* Desktop = original, Mobile = kompakt */}
+        <div className="relative z-10 max-w-md mx-auto px-5 pt-5 pb-6 md:pt-10 md:pb-8">
+          
+          {/* ===== HEADER ===== */}
           <div className={`text-center transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <div className="w-24 h-24 mx-auto mb-5 rounded-3xl bg-white flex items-center justify-center shadow-2xl shadow-black/40 overflow-hidden p-3">
-              <img src="/logo.webp" alt="Top Job Bern" className="w-full h-full object-contain" />
+            
+            {/* Logo: Mobile kleiner, Desktop original */}
+            <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-3 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
+              <img src="/logo.webp" alt={customer.name} className="w-full h-full object-contain" />
             </div>
 
-            <h1 className="text-3xl font-extrabold tracking-tight">
+            {/* Name: Mobile kleiner, Desktop original */}
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
               {customer.name}
             </h1>
-            <p className={`mt-1.5 text-sm font-medium ${theme.badge}`}>
+            
+            {/* Tagline */}
+            <p className={`mt-0.5 md:mt-1.5 text-sm font-medium ${theme.badge}`}>
               {customer.tagline}
             </p>
 
+            {/* Bewertung: Mobile kompakter, Desktop original */}
             {customer.rating && (
-              <div className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
-                <span className="text-yellow-400">★★★★★</span>
-                <span className="text-sm font-semibold">
-                  {customer.rating} · {customer.reviews} Bewertungen
+              <div className="inline-flex items-center gap-1.5 md:gap-2 mt-2.5 md:mt-4 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
+                <span className="text-yellow-400 text-sm md:text-base">★★★★★</span>
+                <span className="text-xs md:text-sm font-semibold">
+                  {customer.rating} · {customer.reviews}+ Bewertungen
                 </span>
               </div>
             )}
           </div>
 
-          {/* Buttons - wie im ersten Screenshot */}
-          <div className="mt-8 space-y-3.5">
+          {/* ===== BUTTONS ===== */}
+          {/* Mobile: etwas enger, Desktop: original */}
+          <div className="mt-5 md:mt-8 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
                 key={btn.label}
@@ -190,36 +199,38 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
                 className={`group block transition-all duration-500 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${150 + i * 70}ms` }}
               >
-                <div className={`rounded-2xl border backdrop-blur-md px-5 py-4 flex items-center gap-4 ${btn.bg} hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg ${btn.label === "Auf Google bewerten" ? "gold-glow" : ""}`}>
-                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center shrink-0 ${btn.iconBg}`}>
+                <div className={`rounded-2xl border backdrop-blur-md px-4 py-3.5 md:px-5 md:py-4 flex items-center gap-3.5 md:gap-4 ${btn.bg} hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg ${btn.label === "Auf Google bewerten" ? "gold-glow" : ""}`}>
+                  
+                  {/* Icon-Box: Mobile etwas kleiner, Desktop original */}
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center shrink-0 ${btn.iconBg}`}>
                     {btn.icon}
                   </div>
 
                   <div className="flex-1 min-w-0 text-left">
-                    <p className="font-bold text-lg leading-tight">{btn.label}</p>
-                    <p className="text-sm text-white/70 truncate">{btn.sub}</p>
+                    <p className="font-bold text-[17px] md:text-lg leading-tight">{btn.label}</p>
+                    <p className="text-[13px] md:text-sm text-white/70 truncate">{btn.sub}</p>
                   </div>
 
-                  <span className="text-xl opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition shrink-0">→</span>
+                  <span className="text-lg md:text-xl opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition shrink-0">→</span>
                 </div>
               </a>
             ))}
           </div>
 
-          {/* Footer */}
-          <div className={`mt-10 flex items-center justify-center gap-3 text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
+          {/* Footer: Mobile kompakter, Desktop original */}
+          <div className={`mt-6 md:mt-10 flex items-center justify-center gap-2.5 md:gap-3 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
             <span>
               © {new Date().getFullYear()}{" "}
               <a href="https://verlinken.ch" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-slate-300 transition">
                 verlinken.ch
               </a>
             </span>
-            <span className="w-px h-3 bg-slate-600"></span>
+            <span className="w-px h-2.5 md:h-3 bg-slate-600"></span>
             <span>Powered by <span className="font-semibold">Deno</span></span>
           </div>
         </div>
 
-        {/* Modal */}
+        {/* Modal bleibt unverändert */}
         {showCard && (
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowCard(false)} />
