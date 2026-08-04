@@ -198,7 +198,6 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
         html, body {
           background-color: #020617 !important;
           color-scheme: dark;
-          overflow: hidden; /* verhindert Scrollen */
         }
         @keyframes gold-shimmer {
           0% { box-shadow: 0 0 6px rgba(251, 191, 36, 0.4), 0 0 12px rgba(245, 158, 11, 0.3), 0 0 18px rgba(217, 119, 6, 0.2); }
@@ -210,51 +209,47 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
         }
       `}</style>
 
-      <main className="h-dvh overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-        {/* Glows */}
+      <main className="min-h-dvh bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden">
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <div className={`absolute -top-32 -right-32 w-96 h-96 ${theme.glow} rounded-full blur-3xl`} />
           <div className="absolute bottom-0 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-md mx-auto px-5 h-full flex flex-col justify-between py-2.5">
+        <div className="relative z-10 max-w-md mx-auto px-5 pt-3 pb-4 md:pt-10 md:pb-8">
           
-          {/* OBERER TEIL – maximal kompakt */}
-          <div className={`text-center transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          {/* HEADER */}
+          <div className={`text-center transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             
-            {/* Logo – kleiner */}
-            <div className="w-[56px] h-[56px] md:w-24 md:h-24 mx-auto mb-1.5 md:mb-4 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl shadow-black/40 overflow-hidden p-1.5 md:p-3">
+            <div className="w-[68px] h-[68px] md:w-24 md:h-24 mx-auto mb-2.5 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
               <img src="/logo.webp" alt={customer.name} className="w-full h-full object-contain" />
             </div>
 
-            <h1 className="text-[22px] md:text-3xl font-extrabold tracking-tight leading-none">
+            <h1 className="text-[24px] md:text-3xl font-extrabold tracking-tight leading-tight">
               {customer.name}
             </h1>
-
-            <p className={`mt-0.5 text-[12px] md:text-sm font-medium ${theme.badge}`}>
+            
+            <p className={`mt-1 text-[13px] md:text-sm font-medium ${theme.badge}`}>
               {customer.tagline}
             </p>
 
-            {/* Standort + Status – sehr eng */}
-            <div className="mt-1 space-y-0.5">
-              <p className="text-[11px] md:text-sm text-white/60 flex items-center justify-center gap-1">
-                <svg className="w-3 h-3 opacity-70" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <div className="mt-2 space-y-0.5">
+              <p className="text-[12px] md:text-sm text-white/60 flex items-center justify-center gap-1.5">
+                <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 {location}
               </p>
-              <p className={`text-[11px] md:text-sm font-medium flex items-center justify-center gap-1 ${status.open ? "text-emerald-400" : "text-white/55"}`}>
+              <p className={`text-[12px] md:text-sm font-medium flex items-center justify-center gap-1.5 ${status.open ? "text-emerald-400" : "text-white/55"}`}>
                 <span className={`w-1.5 h-1.5 rounded-full ${status.open ? "bg-emerald-400" : "bg-white/40"}`} />
                 {status.text}
               </p>
             </div>
 
-            {/* Bewertung */}
             {customer.rating && (
-              <div className="inline-flex items-center gap-1 mt-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/10">
-                <span className="text-yellow-400 text-[11px] md:text-base">★★★★★</span>
-                <span className="text-[11px] md:text-sm font-semibold">
+              <div className="inline-flex items-center gap-1.5 mt-2 md:mt-4 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
+                <span className="text-yellow-400 text-[12px] md:text-base">★★★★★</span>
+                <span className="text-[12px] md:text-sm font-semibold">
                   {customer.rating} · {customer.reviews} Bewertungen
                 </span>
               </div>
@@ -262,7 +257,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           </div>
 
           {/* BUTTONS */}
-          <div className="space-y-2 md:space-y-3.5 my-2">
+          <div className="mt-3.5 md:mt-8 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
                 key={btn.label}
@@ -270,27 +265,27 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
                 target={btn.onClick ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 onClick={btn.onClick}
-                className={`group block transition-all duration-500 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-                style={{ transitionDelay: `${80 + i * 50}ms` }}
+                className={`group block transition-all duration-500 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                style={{ transitionDelay: `${120 + i * 60}ms` }}
               >
-                <div className={`rounded-2xl border backdrop-blur-md px-3.5 py-3 md:px-5 md:py-4 flex items-center gap-3 md:gap-4 ${btn.bg} hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg ${btn.label === "Google Bewertung" ? "gold-glow" : ""}`}>
-                  <div className={`w-[44px] h-[44px] md:w-14 md:h-14 rounded-xl flex items-center justify-center shrink-0 ${btn.iconBg}`}>
+                <div className={`rounded-2xl border backdrop-blur-md px-4 py-3.5 md:px-5 md:py-4 flex items-center gap-3.5 md:gap-4 ${btn.bg} hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg ${btn.label === "Google Bewertung" ? "gold-glow" : ""}`}>
+                  <div className={`w-[48px] h-[48px] md:w-14 md:h-14 rounded-xl flex items-center justify-center shrink-0 ${btn.iconBg}`}>
                     {btn.icon}
                   </div>
 
                   <div className="flex-1 min-w-0 text-left">
-                    <p className="font-bold text-[15.5px] md:text-lg leading-tight">{btn.label}</p>
-                    <p className="text-[12px] md:text-sm text-white/70 truncate">{btn.sub}</p>
+                    <p className="font-bold text-[16px] md:text-lg leading-tight">{btn.label}</p>
+                    <p className="text-[13px] md:text-sm text-white/70 truncate">{btn.sub}</p>
                   </div>
 
-                  <span className="text-lg opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition shrink-0">→</span>
+                  <span className="text-lg md:text-xl opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition shrink-0">→</span>
                 </div>
               </a>
             ))}
           </div>
 
           {/* FOOTER */}
-          <div className={`flex items-center justify-center gap-2 text-[10px] md:text-xs text-slate-500 transition-all duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
+          <div className={`mt-4 md:mt-10 flex items-center justify-center gap-2.5 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
             <span>
               © {new Date().getFullYear()}{" "}
               <a href="https://verlinken.ch" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-slate-300 transition">
@@ -302,7 +297,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           </div>
         </div>
 
-        {/* Modal bleibt unverändert */}
+        {/* Modal */}
         {showCard && (
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowCard(false)} />
