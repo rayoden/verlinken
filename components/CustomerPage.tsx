@@ -186,27 +186,26 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
       sub: customer.website.replace(/^https?:\/\/(www\.)?/, ""),
       href: customer.website,
       icon: (
-  <svg
-    viewBox="0 0 24 24"
-    className="w-7 h-7"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.6"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    {/* Bildschirm */}
-    <rect x="2" y="3" width="20" height="14" rx="2" />
-    {/* Standfuß */}
-    <path d="M8 21h8" />
-    <path d="M12 17v4" />
-    
-    {/* Globe – Linien dünn + korrekt innerhalb des Kreises */}
-    <circle cx="12" cy="10" r="3.4" strokeWidth="0.6" />
-    <path d="M8.6 10h6.8" strokeWidth="0.6" />
-    <path d="M12 6.6c1.5 1.3 1.5 5.5 0 6.8c-1.5-1.3-1.5-5.5 0-6.8z" strokeWidth="0.6" />
-  </svg>
-),
+        <svg
+          viewBox="0 0 24 24"
+          className="w-7 h-7"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <path d="M8 21h8" />
+          <path d="M12 17v4" />
+          <circle cx="12" cy="10" r="3.4" strokeWidth="0.6" />
+          <path d="M8.6 10h6.8" strokeWidth="0.6" />
+          <path
+            d="M12 6.6c1.5 1.3 1.5 5.5 0 6.8c-1.5-1.3-1.5-5.5 0-6.8z"
+            strokeWidth="0.6"
+          />
+        </svg>
+      ),
       bg: "bg-gradient-to-r from-blue-500/25 to-cyan-500/25 border-blue-400/50",
       iconBg: "bg-blue-500/30",
     },
@@ -271,15 +270,15 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           <div className="absolute bottom-0 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-md mx-auto px-5 pt-3 pb-4 md:pt-8 md:pb-6">
-          {/* HEADER */}
+        <div className="relative z-10 max-w-md mx-auto px-5 pt-2.5 pb-3 md:pt-8 md:pb-6">
+          {/* HEADER – kompakt auf Mobile */}
           <div
             className={`text-center transition-all duration-700 ${
               loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             {/* Logo */}
-            <div className="w-[72px] h-[72px] md:w-24 md:h-24 mx-auto mb-2.5 md:mb-4 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2.5 md:p-3">
+            <div className="w-[64px] h-[64px] md:w-24 md:h-24 mx-auto mb-2 md:mb-4 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
               <img
                 src="/logo.webp"
                 alt={customer.name}
@@ -287,17 +286,17 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
               />
             </div>
 
-            <h1 className="text-[26px] md:text-3xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-[24px] md:text-3xl font-extrabold tracking-tight leading-tight">
               {customer.name}
             </h1>
 
-            <p className={`mt-1 text-sm font-medium ${theme.badge}`}>
+            <p className={`mt-0.5 text-[13px] md:text-sm font-medium ${theme.badge}`}>
               {customer.tagline}
             </p>
 
             {/* Standort + Öffnungsstatus */}
-            <div className="mt-2 space-y-1">
-              <p className="text-[13px] md:text-sm text-white/60 flex items-center justify-center gap-1.5">
+            <div className="mt-1.5 space-y-0.5">
+              <p className="text-[12px] md:text-sm text-white/60 flex items-center justify-center gap-1.5">
                 <svg
                   className="w-3.5 h-3.5 opacity-70"
                   fill="none"
@@ -319,7 +318,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
                 {location}
               </p>
               <p
-                className={`text-[13px] md:text-sm font-medium flex items-center justify-center gap-1.5 ${
+                className={`text-[12px] md:text-sm font-medium flex items-center justify-center gap-1.5 ${
                   status.open ? "text-emerald-400" : "text-white/55"
                 }`}
               >
@@ -334,11 +333,11 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
 
             {/* Bewertung */}
             {customer.rating && (
-              <div className="inline-flex items-center gap-1.5 md:gap-2 mt-2 md:mt-3 px-3.5 md:px-4 py-1 md:py-1.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
-                <span className="text-yellow-400 text-[13px] md:text-base">
+              <div className="inline-flex items-center gap-1.5 mt-1.5 md:mt-3 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
+                <span className="text-yellow-400 text-[12px] md:text-base">
                   ★★★★★
                 </span>
-                <span className="text-[13px] md:text-sm font-semibold">
+                <span className="text-[12px] md:text-sm font-semibold">
                   {customer.rating} · {customer.reviews} Bewertungen
                 </span>
               </div>
@@ -346,7 +345,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           </div>
 
           {/* BUTTONS */}
-          <div className="mt-3.5 md:mt-5 space-y-2.5 md:space-y-3.5">
+          <div className="mt-3 md:mt-5 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
                 key={btn.label}
@@ -389,7 +388,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
 
           {/* FOOTER */}
           <div
-            className={`mt-4 md:mt-8 flex items-center justify-center gap-2.5 md:gap-3 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${
+            className={`mt-3.5 md:mt-8 flex items-center justify-center gap-2.5 md:gap-3 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${
               loaded ? "opacity-100" : "opacity-0"
             }`}
           >
