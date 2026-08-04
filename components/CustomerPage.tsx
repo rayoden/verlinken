@@ -105,7 +105,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
   const buttons = [
     {
       label: "Google Bewertung",
-      sub: "Ihr Feedback hilft uns weiter!",
+      sub: "Feedback treibt uns an!",
       href: customer.googleReview,
       icon: (
         <svg viewBox="0 0 24 24" className="w-9 h-9">
@@ -139,7 +139,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
       ? [
           {
             label: "Instagram",
-            sub: "Folge uns",
+            sub: "Folgen, liken, teilen",
             href: customer.instagram,
             icon: (
               <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
