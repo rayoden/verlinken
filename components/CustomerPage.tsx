@@ -215,24 +215,24 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           <div className="absolute bottom-0 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-md mx-auto px-5 pt-3 pb-4 md:pt-10 md:pb-8">
+        <div className="relative z-10 max-w-md mx-auto px-5 pt-4 pb-3 md:pt-10 md:pb-8">
           
           {/* HEADER */}
           <div className={`text-center transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             
-            <div className="w-[68px] h-[68px] md:w-24 md:h-24 mx-auto mb-2.5 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
+            <div className="w-[64px] h-[64px] md:w-24 md:h-24 mx-auto mb-2 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
               <img src="/logo.webp" alt={customer.name} className="w-full h-full object-contain" />
             </div>
 
-            <h1 className="text-[24px] md:text-3xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-[23px] md:text-3xl font-extrabold tracking-tight leading-tight">
               {customer.name}
             </h1>
             
-            <p className={`mt-1 text-[13px] md:text-sm font-medium ${theme.badge}`}>
+            <p className={`mt-0.5 text-[13px] md:text-sm font-medium ${theme.badge}`}>
               {customer.tagline}
             </p>
 
-            <div className="mt-2 space-y-0.5">
+            <div className="mt-1.5 space-y-0.5">
               <p className="text-[12px] md:text-sm text-white/60 flex items-center justify-center gap-1.5">
                 <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -246,7 +246,6 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
               </p>
             </div>
 
-            {/* Abstand Öffnungszeiten → Bewertung verkleinert (nur Mobile) */}
             {customer.rating && (
               <div className="inline-flex items-center gap-1.5 mt-1 md:mt-4 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
                 <span className="text-yellow-400 text-[12px] md:text-base">★★★★★</span>
@@ -257,8 +256,8 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
             )}
           </div>
 
-          {/* Abstand Bewertung → Google-Button verkleinert (nur Mobile) */}
-          <div className="mt-2.5 md:mt-8 space-y-2.5 md:space-y-3.5">
+          {/* BUTTONS – stark reduzierter Abstand nach oben auf Mobile */}
+          <div className="mt-2 md:mt-8 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
                 key={btn.label}
@@ -286,7 +285,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           </div>
 
           {/* FOOTER */}
-          <div className={`mt-4 md:mt-10 flex items-center justify-center gap-2.5 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
+          <div className={`mt-3 md:mt-10 flex items-center justify-center gap-2.5 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
             <span>
               © {new Date().getFullYear()}{" "}
               <a href="https://verlinken.ch" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-slate-300 transition">
