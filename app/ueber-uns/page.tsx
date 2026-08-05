@@ -10,14 +10,21 @@ export default function UeberUnsPage() {
             alt="verlinken.ch" 
             className="w-10 h-10 rounded-xl"
           />
-          <span className="text-xl font-bold tracking-tight">verlinken.ch</span>
+          <span className="text-xl font-bold tracking-tight text-white flex items-baseline">
+            verlinken
+            <span className="relative mx-[2px] w-[8px] h-[8px] rounded-full bg-red-600 flex items-center justify-center translate-y-[1px]">
+              <span className="absolute w-[4.5px] h-[1.3px] bg-white rounded-sm"></span>
+              <span className="absolute h-[4.5px] w-[1.3px] bg-white rounded-sm"></span>
+            </span>
+            <span className="text-red-600">ch</span>
+          </span>
         </div>
 
         <h1 className="text-3xl font-bold mb-8">Über uns</h1>
 
         <div className="space-y-6 text-slate-300 leading-relaxed">
           <p>
-            verlinken.ch ist eine einfache und moderne Lösung für lokale Betriebe, 
+            verlinken.ch ist eine einfache und moderne Lösung für lokale Betriebe, um mehr Google Bewertungen zu erhalten und
             ihre digitale Präsenz zu stärken.
           </p>
 

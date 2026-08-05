@@ -7,13 +7,42 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
 
-  // Nur auf der Startseite die große Navbar anzeigen
   const isHome = pathname === "/";
 
-  if (!isHome) {
-    // Auf allen anderen Seiten (Kunden, Impressum, Datenschutz usw.) 
-    // kein kleines Logo mehr → verhindert Überlappung
+  // Rechtliche Seiten → kein kleines Logo (wegen Überlappung)
+  const isLegalPage =
+    pathname.startsWith("/impressum") ||
+    pathname.startsWith("/datenschutz") ||
+    pathname.startsWith("/kontakt") ||
+    pathname.startsWith("/ueber-uns");
+
+  if (isLegalPage) {
     return null;
+  }
+
+  if (!isHome) {
+    // Auf Kunden-Seiten → kleines Logo oben links behalten
+    return (
+      <div className="fixed top-4 left-4 z-50">
+        <Link href="/" className="flex items-center gap-2 opacity-80 hover:opacity-100 transition">
+          <Image
+            src="/logos/logo-icon.svg"
+            alt="verlinken.ch"
+            width={28}
+            height={28}
+            className="w-7 h-7"
+          />
+          <span className="text-sm font-semibold text-white/90 hidden sm:inline">
+            verlinken
+            <span className="relative mx-[1px] w-[7px] h-[7px] rounded-full bg-red-600 inline-flex items-center justify-center translate-y-[1px]">
+              <span className="absolute w-[4px] h-[1.2px] bg-white rounded-sm"></span>
+              <span className="absolute h-[4px] w-[1.2px] bg-white rounded-sm"></span>
+            </span>
+            <span className="text-red-600">ch</span>
+          </span>
+        </Link>
+      </div>
+    );
   }
 
   // Große Navbar nur auf der Startseite
