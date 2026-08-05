@@ -36,8 +36,8 @@ export default function Home() {
 
           <p className="mt-6 text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">
             Mit einem Scan direkt zu Google, WhatsApp, Website oder Instagram.
-            <br className="hidden md:block" />
-            Einfach. Professionell. Für Schweizer Unternehmen.
+            <br className="block mt-3" />
+            <span className="text-white/80">Einfach. Professionell. Für Schweizer Unternehmen.</span>
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-3.5 justify-center">
@@ -72,7 +72,7 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Zweite Zeile – alles auf einer Zeile */}
+          {/* Zweite Zeile */}
           <div className="mt-3 flex items-center justify-center gap-x-3 text-[13px]">
             <a href="/impressum" className="hover:text-white/70 transition">Impressum</a>
             <span className="w-px h-3 bg-white/20"></span>
