@@ -56,16 +56,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rest der Seite bleibt gleich... */}
-      {/* Ich kürze hier ab, damit du es sauber kopieren kannst. */}
-
-      {/* Footer – sauber */}
+      {/* Footer */}
       <footer className="py-8 px-5 border-t border-white/5">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
-          <span>© 2026 verlinken.ch</span>
-          <a href="mailto:info@verlinken.ch" className="hover:text-white/70 transition">
-            Kontakt
-          </a>
+        <div className="max-w-6xl mx-auto text-center text-sm text-white/40">
+          
+          {/* Erste Zeile */}
+          <div className="flex items-center justify-center gap-2.5">
+            <span>© {new Date().getFullYear()} verlinken.ch</span>
+            <span className="w-px h-3 bg-white/20"></span>
+            <span>Powered by <span className="font-medium text-white/60">Deno</span></span>
+          </div>
+
+          {/* Zweite Zeile */}
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <a href="/impressum" className="hover:text-white/70 transition">Impressum</a>
+            <span className="w-px h-3 bg-white/20"></span>
+            <a href="/datenschutz" className="hover:text-white/70 transition">Datenschutz</a>
+            <span className="w-px h-3 bg-white/20"></span>
+            <a href="/kontakt" className="hover:text-white/70 transition">Kontakt</a>
+            <span className="w-px h-3 bg-white/20"></span>
+            <a href="/ueber-uns" className="hover:text-white/70 transition">Über uns</a>
+          </div>
         </div>
       </footer>
     </main>

@@ -2,6 +2,17 @@ export default function DatenschutzPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white p-6 md:p-12">
       <div className="max-w-2xl mx-auto">
+        
+        {/* Logo + Name */}
+        <div className="flex items-center gap-3 mb-10">
+          <img 
+            src="/logos/logo-icon.svg" 
+            alt="verlinken.ch" 
+            className="w-10 h-10 rounded-xl"
+          />
+          <span className="text-xl font-bold tracking-tight">verlinken.ch</span>
+        </div>
+
         <h1 className="text-3xl font-bold mb-8">Datenschutzerklärung</h1>
 
         <div className="space-y-8 text-slate-300 leading-relaxed">
@@ -10,7 +21,7 @@ export default function DatenschutzPage() {
             <h2 className="text-xl font-semibold text-white mb-3">1. Verantwortlicher</h2>
             <p>
               Dennis Rast<br />
-              [Deine Strasse + Hausnummer]<br />
+              [Strasse + Hausnummer]<br />
               3052 Zollikofen<br />
               Schweiz<br /><br />
               E-Mail: info@verlinken.ch
