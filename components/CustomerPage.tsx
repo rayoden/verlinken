@@ -198,6 +198,8 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
         html, body {
           background-color: #020617 !important;
           color-scheme: dark;
+          overflow-x: hidden;
+          overscroll-behavior: none;
         }
         @keyframes gold-shimmer {
           0% { box-shadow: 0 0 6px rgba(251, 191, 36, 0.4), 0 0 12px rgba(245, 158, 11, 0.3), 0 0 18px rgba(217, 119, 6, 0.2); }
@@ -215,13 +217,20 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           <div className="absolute bottom-0 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-md mx-auto px-5 pt-4 pb-3 md:pt-10 md:pb-8">
+        <div className="relative z-10 max-w-md mx-auto px-5 pt-4 pb-6 md:pt-10 md:pb-10">
           
           {/* HEADER */}
           <div className={`text-center transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             
             <div className="w-[64px] h-[64px] md:w-24 md:h-24 mx-auto mb-2 md:mb-5 rounded-2xl md:rounded-3xl bg-white flex items-center justify-center shadow-xl md:shadow-2xl shadow-black/40 overflow-hidden p-2 md:p-3">
-              <img src="/logo.webp" alt={customer.name} className="w-full h-full object-contain" />
+              <img 
+  src={`/logos/customer/${customer.slug}.webp`} 
+  alt={customer.name} 
+  className="w-full h-full object-contain"
+  onError={(e) => {
+    (e.target as HTMLImageElement).src = "/logo.webp";
+  }}
+/>
             </div>
 
             <h1 className="text-[23px] md:text-3xl font-extrabold tracking-tight leading-tight">
@@ -256,7 +265,7 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
             )}
           </div>
 
-          {/* BUTTONS – stark reduzierter Abstand nach oben auf Mobile */}
+          {/* BUTTONS */}
           <div className="mt-2 md:mt-8 space-y-2.5 md:space-y-3.5">
             {buttons.map((btn, i) => (
               <a
@@ -285,15 +294,30 @@ export default function CustomerPage({ customer }: { customer: Customer }) {
           </div>
 
           {/* FOOTER */}
-          <div className={`mt-3 md:mt-10 flex items-center justify-center gap-2.5 text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
-            <span>
-              © {new Date().getFullYear()}{" "}
-              <a href="https://verlinken.ch" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-slate-300 transition">
-                verlinken.ch
-              </a>
-            </span>
-            <span className="w-px h-2.5 bg-slate-600"></span>
-            <span>Powered by <span className="font-semibold">Deno</span></span>
+          <div className={`mt-6 md:mt-10 text-center text-[11px] md:text-xs text-slate-500 transition-all duration-700 delay-500 ${loaded ? "opacity-100" : "opacity-0"}`}>
+            
+            {/* Erste Zeile – © + Powered by Deno */}
+            <div className="flex items-center justify-center gap-2.5">
+              <span>
+                © {new Date().getFullYear()}{" "}
+                <a href="https://verlinken.ch" className="font-semibold hover:text-slate-300 transition">
+                  verlinken.ch
+                </a>
+              </span>
+              <span className="w-px h-2.5 bg-slate-600"></span>
+              <span>Powered by <span className="font-semibold">Deno</span></span>
+            </div>
+
+            {/* Zweite Zeile – rechtliche Links */}
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+              <a href="/impressum" className="hover:text-slate-300 transition">Impressum</a>
+              <span className="w-px h-2.5 bg-slate-600"></span>
+              <a href="/datenschutz" className="hover:text-slate-300 transition">Datenschutz</a>
+              <span className="w-px h-2.5 bg-slate-600"></span>
+              <a href="/kontakt" className="hover:text-slate-300 transition">Kontakt</a>
+              <span className="w-px h-2.5 bg-slate-600"></span>
+              <a href="/ueber-uns" className="hover:text-slate-300 transition">Über uns</a>
+            </div>
           </div>
         </div>
 
