@@ -10,7 +10,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-dvh bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden">
+    <main className="min-h-dvh bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden overscroll-none">
       {/* Background Glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
@@ -62,13 +62,18 @@ export default function Home() {
           
           {/* Erste Zeile */}
           <div className="flex items-center justify-center gap-2.5">
-            <span>© {new Date().getFullYear()} verlinken.ch</span>
+            <span>
+              © {new Date().getFullYear()}{" "}
+              <span className="font-semibold text-white/70">verlinken.ch</span>
+            </span>
             <span className="w-px h-3 bg-white/20"></span>
-            <span>Powered by <span className="font-medium text-white/60">Deno</span></span>
+            <span>
+              Powered by <span className="font-semibold text-white/70">Deno</span>
+            </span>
           </div>
 
-          {/* Zweite Zeile */}
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+          {/* Zweite Zeile – alles auf einer Zeile */}
+          <div className="mt-3 flex items-center justify-center gap-x-3 text-[13px]">
             <a href="/impressum" className="hover:text-white/70 transition">Impressum</a>
             <span className="w-px h-3 bg-white/20"></span>
             <a href="/datenschutz" className="hover:text-white/70 transition">Datenschutz</a>
