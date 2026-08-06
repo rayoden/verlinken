@@ -4,10 +4,41 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
   }, []);
+
+  // Hintergrund scrollen sperren, solange die Demo geöffnet ist
+  useEffect(() => {
+    if (demoOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [demoOpen]);
+
+  // ESC zum Schliessen
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDemoOpen(false);
+      }
+    };
+
+    if (demoOpen) {
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [demoOpen]);
 
   return (
     <main
@@ -20,16 +51,9 @@ export default function Home() {
       "
     >
       {/* =========================================================
-          HINTERGRUND
+          BACKGROUND
       ========================================================= */}
-      <div
-        className="
-          fixed
-          inset-0
-          pointer-events-none
-          overflow-hidden
-        "
-      >
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div
           className="
             absolute
@@ -57,7 +81,6 @@ export default function Home() {
         />
       </div>
 
-
       {/* =========================================================
           HERO
       ========================================================= */}
@@ -73,9 +96,7 @@ export default function Home() {
           px-5
         "
       >
-
         <div className="relative z-10 max-w-7xl mx-auto w-full">
-
           <div
             className="
               grid
@@ -85,7 +106,6 @@ export default function Home() {
               lg:gap-0
             "
           >
-
             {/* =====================================================
                 LINKER BEREICH
             ===================================================== */}
@@ -97,14 +117,9 @@ export default function Home() {
                 lg:text-left
                 transition-opacity
                 duration-500
-                ${
-                  loaded
-                    ? "opacity-100"
-                    : "opacity-0"
-                }
+                ${loaded ? "opacity-100" : "opacity-0"}
               `}
             >
-
               {/* Logo */}
               <div
                 className="
@@ -125,6 +140,7 @@ export default function Home() {
                   alt="verlinken.ch"
                   width="112"
                   height="112"
+                  loading="eager"
                   className="
                     w-full
                     h-full
@@ -134,10 +150,7 @@ export default function Home() {
                 />
               </div>
 
-
-              {/* =================================================
-                  HEADLINE
-              ================================================= */}
+              {/* Headline */}
               <h1
                 className="
                   text-4xl
@@ -169,10 +182,7 @@ export default function Home() {
                 </span>
               </h1>
 
-
-              {/* =================================================
-                  BESCHREIBUNG
-              ================================================= */}
+              {/* Beschreibung */}
               <p
                 className="
                   mt-6
@@ -195,10 +205,7 @@ export default function Home() {
                 </span>
               </p>
 
-
-              {/* =================================================
-                  BUTTONS
-              ================================================= */}
+              {/* Buttons */}
               <div
                 className="
                   mt-9
@@ -210,7 +217,6 @@ export default function Home() {
                   lg:justify-start
                 "
               >
-
                 <a
                   href="#start"
                   className="
@@ -233,9 +239,10 @@ export default function Home() {
                   Kostenlos starten
                 </a>
 
-
-                <a
-                  href="/top-job-bern"
+                {/* DEMO BUTTON */}
+                <button
+                  type="button"
+                  onClick={() => setDemoOpen(true)}
                   className="
                     px-8
                     py-4
@@ -246,19 +253,17 @@ export default function Home() {
                     border
                     border-white/15
                     hover:bg-white/10
-                    transition-colors
+                    transition-all
                     duration-200
+                    hover:scale-[1.02]
+                    cursor-pointer
                   "
                 >
                   Demo ansehen
-                </a>
-
+                </button>
               </div>
 
-
-              {/* =================================================
-                  BEWERTUNGEN
-              ================================================= */}
+              {/* Bewertungen */}
               <div
                 className="
                   mt-8
@@ -277,9 +282,7 @@ export default function Home() {
                   Bereits von Schweizer Unternehmen genutzt
                 </span>
               </div>
-
             </div>
-
 
             {/* =====================================================
                 RECHTER BEREICH
@@ -293,8 +296,6 @@ export default function Home() {
                 lg:-ml-4
               "
             >
-
-              {/* Dezenter Glow hinter dem Bild */}
               <div
                 className="
                   absolute
@@ -311,10 +312,6 @@ export default function Home() {
                 "
               />
 
-
-              {/* =================================================
-                  BILD
-              ================================================= */}
               <div
                 className="
                   relative
@@ -322,7 +319,6 @@ export default function Home() {
                   max-w-[650px]
                 "
               >
-
                 <img
                   src="/astronaut-scan.png"
                   alt="verlinken.ch QR-Code Bewertung"
@@ -340,7 +336,6 @@ export default function Home() {
                   "
                 />
 
-
                 {/* Linker Fade */}
                 <div
                   className="
@@ -356,7 +351,6 @@ export default function Home() {
                     to-transparent
                   "
                 />
-
 
                 {/* Rechter Fade */}
                 <div
@@ -374,7 +368,6 @@ export default function Home() {
                   "
                 />
 
-
                 {/* Oberer Fade */}
                 <div
                   className="
@@ -391,7 +384,6 @@ export default function Home() {
                   "
                 />
 
-
                 {/* Unterer Fade */}
                 <div
                   className="
@@ -407,17 +399,12 @@ export default function Home() {
                     to-transparent
                   "
                 />
-
               </div>
-
             </div>
-
           </div>
-
         </div>
 
-
-        {/* Übergang nach unten */}
+        {/* Hero Übergang */}
         <div
           className="
             absolute
@@ -431,9 +418,7 @@ export default function Home() {
             to-transparent
           "
         />
-
       </section>
-
 
       {/* =========================================================
           CTA
@@ -447,9 +432,7 @@ export default function Home() {
           bg-[#08072f]
         "
       >
-
         <div className="max-w-5xl mx-auto">
-
           <div
             className="
               rounded-3xl
@@ -461,7 +444,6 @@ export default function Home() {
               text-center
             "
           >
-
             <p
               className="
                 text-sm
@@ -474,7 +456,6 @@ export default function Home() {
               Bereit für mehr Bewertungen?
             </p>
 
-
             <h2
               className="
                 mt-3
@@ -485,7 +466,6 @@ export default function Home() {
             >
               Mach aus jedem Scan einen Kundenkontakt.
             </h2>
-
 
             <p
               className="
@@ -500,9 +480,7 @@ export default function Home() {
               wo du sie haben möchtest.
             </p>
 
-
             <div className="mt-7">
-
               <a
                 href="/kontakt"
                 className="
@@ -520,15 +498,10 @@ export default function Home() {
               >
                 Jetzt Kontakt aufnehmen
               </a>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
-
 
       {/* =========================================================
           FOOTER
@@ -542,7 +515,6 @@ export default function Home() {
           bg-[#08072f]
         "
       >
-
         <div
           className="
             max-w-6xl
@@ -552,8 +524,6 @@ export default function Home() {
             text-white/40
           "
         >
-
-          {/* Erste Zeile */}
           <div
             className="
               flex
@@ -563,7 +533,6 @@ export default function Home() {
               flex-wrap
             "
           >
-
             <span>
               © {new Date().getFullYear()}{" "}
               <span className="font-semibold text-white/70">
@@ -579,11 +548,8 @@ export default function Home() {
                 Deno
               </span>
             </span>
-
           </div>
 
-
-          {/* Zweite Zeile */}
           <div
             className="
               mt-3
@@ -596,7 +562,6 @@ export default function Home() {
               flex-wrap
             "
           >
-
             <a
               href="/impressum"
               className="hover:text-white/70 transition-colors"
@@ -630,13 +595,162 @@ export default function Home() {
             >
               Über uns
             </a>
-
           </div>
-
         </div>
-
       </footer>
 
+      {/* =========================================================
+          DEMO POPUP
+      ========================================================= */}
+      {demoOpen && (
+        <div
+          className="
+            fixed
+            inset-0
+            z-[9999]
+            bg-black/80
+            overflow-hidden
+            flex
+            items-center
+            justify-center
+            p-3
+          "
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setDemoOpen(false);
+            }
+          }}
+        >
+          {/* =====================================================
+              SMARTPHONE
+              Höhe so gewählt, dass der Inhalt mittiger wirkt
+              und gleichzeitig genug Platz für Popups (Visitenkarte etc.) bleibt
+          ===================================================== */}
+          <div
+            className="
+              relative
+              w-full
+              max-w-[390px]
+              h-[min(82dvh,780px)]
+              rounded-[44px]
+              bg-black
+              p-[10px]
+              border
+              border-white/20
+              shadow-[0_30px_100px_rgba(0,0,0,0.8)]
+            "
+            onMouseDown={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            {/* =================================================
+                DISPLAY
+            ================================================= */}
+            <div
+              className="
+                relative
+                w-full
+                h-full
+                overflow-hidden
+                rounded-[36px]
+                bg-[#08072f]
+              "
+            >
+              {/* =================================================
+                  IFRAME
+              ================================================= */}
+              <iframe
+                src="/top-job-bern"
+                title="Top Job Bern Mobile Demo"
+                className="
+                  absolute
+                  inset-0
+                  w-full
+                  h-full
+                  border-0
+                  m-0
+                  p-0
+                  bg-[#08072f]
+                "
+              />
+
+              {/* =================================================
+                  DYNAMIC ISLAND / KAMERA (halb so gross)
+              ================================================= */}
+              <div
+                className="
+                  absolute
+                  z-[100]
+                  top-0
+                  left-1/2
+                  -translate-x-1/2
+                  w-[60px]
+                  h-[15px]
+                  bg-black
+                  rounded-b-[9px]
+                  pointer-events-none
+                "
+              />
+
+              {/* =================================================
+                  DISPLAY RAND
+              ================================================= */}
+              <div
+                className="
+                  absolute
+                  inset-0
+                  z-[110]
+                  rounded-[36px]
+                  border
+                  border-white/[0.035]
+                  pointer-events-none
+                "
+              />
+            </div>
+
+            {/* =================================================
+                SCHLIESSEN
+            ================================================= */}
+            <button
+              type="button"
+              onClick={() => setDemoOpen(false)}
+              aria-label="Demo schliessen"
+              className="
+                absolute
+                -top-3
+                -right-3
+                z-[200]
+                w-11
+                h-11
+                rounded-full
+                flex
+                items-center
+                justify-center
+                bg-white
+                text-black
+                shadow-xl
+                hover:scale-105
+                transition-transform
+                duration-200
+                cursor-pointer
+              "
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
+                <path d="M6 6L18 18" />
+                <path d="M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
